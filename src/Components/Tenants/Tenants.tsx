@@ -4,6 +4,7 @@ import { BsPlusLg } from "react-icons/bs";
 import { useModal } from "../../hooks/useModal";
 import Modal from "../Modal/Modal";
 import Table from "./Table";
+import Table2 from "./components/Table2/Table2";
 import { data } from "./data";
 import "./Tenants.scss";
 import Form from "./components/Form";
@@ -27,7 +28,10 @@ const Tenants = () => {
         classname="Tenants-modalWidth"
       />
       {/* <Table data={data} /> */}
-      <Table />
+      {/* <Table /> */}
+      <div>
+        <Table2 />
+      </div>
     </div>
   );
 };
