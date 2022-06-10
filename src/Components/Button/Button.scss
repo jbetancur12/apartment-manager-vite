@@ -1,0 +1,62 @@
+.Button {
+  font-family: inherit;
+  padding: 0.5em 1em;
+  border: none rgba(0, 0, 0, 0);
+  text-decoration: none;
+  display: flex;
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &_sucess {
+    background: rgb(28, 184, 65);
+  }
+
+  &_error {
+    background: rgb(202, 60, 60);
+  }
+
+  &_warning {
+    background: rgb(223, 117, 20);
+  }
+
+  &_primary {
+    background: rgb(203, 210, 212);
+  }
+
+  &_secondary {
+    background: rgb(66, 184, 221);
+  }
+
+  &_xsmall {
+    font-size: 70%;
+  }
+
+  &_small {
+    font-size: 85%;
+  }
+
+  &_large {
+    font-size: 110%;
+  }
+
+  &_xlarge {
+    font-size: 125%;
+  }
+
+  &_isFullWidth {
+    display: flex;
+    width: 100%;
+  }
+}
+
+.Button > *:first-child {
+  padding-right: 6px;
+}

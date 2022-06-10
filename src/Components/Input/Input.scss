@@ -1,0 +1,70 @@
+.Input {
+  &-error {
+    color: #cc0033;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 15px;
+    margin: 5px 0 0;
+  }
+  &-container {
+    position: relative;
+    margin-bottom: 25px;
+
+    label {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      font-size: 16px;
+      color: #000;
+      // pointer-event: none;
+      transition: all 0.5s ease-in-out;
+    }
+
+    input {
+      border: 0;
+      border-bottom: 1px solid #555;
+      background: transparent;
+      width: 100%;
+      padding: 8px 0 5px 0;
+      font-size: 16px;
+      color: #000;
+
+      &::-webkit-input-placeholder {
+        opacity: 0;
+        transition: opacity 0.2s ease-out;
+      }
+
+      &::-moz-placeholder {
+        opacity: 0;
+        transition: opacity 0.2s ease-out;
+      }
+
+      &:focus,
+      &:not(:placeholder-shown) {
+        border: none;
+        outline: none;
+        border-bottom: 2px solid #e74c3c;
+        transition: opacity 0.2s ease-out;
+        will-change: opacity;
+        &::-webkit-input-placeholder {
+          opacity: 1;
+          transition: 0.2s;
+        }
+
+        &::-moz-placeholder {
+          opacity: 1;
+          transition: 0.2s;
+        }
+
+        ~ {
+          label {
+            top: -12px;
+            font-size: 12px;
+            transition: top 0.2s cubic-bezier(0.9, -0.15, 0.1, 1.15),
+              opacity 0.2s ease-out;
+          }
+        }
+      }
+    }
+  }
+}

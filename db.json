@@ -1,0 +1,16 @@
+{
+  "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
+  "tenants": [
+    {
+      "id": 1,
+      "doc": 1088279491,
+      "firstName": "Jorge",
+      "lastName": "Betancur",
+      "email": "alejobetancur12@hotmail.com",
+      "phone": 3138124282,
+      "address": "Calle 44 No 20 45"
+    }
+  ],
+  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
+  "profile": { "name": "typicode" }
+}
