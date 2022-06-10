@@ -13,13 +13,15 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@table-library/react-table-library": "^3.1.5",
+    "@typescript-eslint/parser": "^5.27.1",
     "classnames": "^2.3.1",
     "purecss": "^2.1.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-hook-form": "^7.32.0",
     "react-icons": "^4.4.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "ts-standard": "^11.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
@@ -42,19 +44,25 @@
     "prettier": "^2.6.2",
     "prettier-config-standard": "^5.0.0",
     "sass": "^1.52.3",
-    "ts-standard": "^11.0.0",
     "typescript": "^4.6.3",
     "vite": "^2.9.9"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "npx prettier --write",
-      "npx ts-standard --fix"
+      "npx prettier --write"
     ]
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "ts-standard": {
+    "ignore": [
+      "dist",
+      "src/**/*.stories.tsx",
+      "src/vite-env.d.ts",
+      "vite.config.ts"
+    ]
   }
 }

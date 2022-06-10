@@ -1,14 +1,14 @@
-import Input from "./Input";
+import Input from './Input'
 
 export default {
-  title: "Input",
+  title: 'Input',
   component: Input,
 
   args: {
-    placeholder: "Ejemplo",
-    label: "Email",
-    type: "text",
-  },
+    placeholder: 'Ejemplo',
+    label: 'Email',
+    type: 'text'
+  }
   // argTypes: {
   //   type: {
   //     options: ["primary", "secondary", "sucess", "error", "warning"],
@@ -41,6 +41,6 @@ export default {
   //     },
   //   },
   // },
-};
+}
 
-export const Default = ({ ...args }) => <Input {...args} />;
+export const Default = ({ ...args }): JSX.Element => <Input {...args} />

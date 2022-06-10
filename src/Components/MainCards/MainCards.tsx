@@ -1,8 +1,8 @@
-import React from "react";
-import Card from "../Card/Card";
-import "./MainCards.scss";
+import React from 'react'
+import Card from '../Card/Card'
+import './MainCards.scss'
 
-const MainCards = () => {
+const MainCards = (): JSX.Element => {
   return (
     <div className="pure-u-1">
       <div className="pure-u-1">
@@ -42,7 +42,7 @@ const MainCards = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MainCards;
+export default MainCards

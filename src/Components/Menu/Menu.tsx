@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react'
 import {
   MdApartment,
   MdAccountBalance,
-  MdOutlineNotificationsNone,
-} from "react-icons/md";
-import { AiOutlineHome } from "react-icons/ai";
-import { RiParentLine, RiSettings4Line } from "react-icons/ri";
-import "./Menu.scss";
-import { Link } from "react-router-dom";
+  MdOutlineNotificationsNone
+} from 'react-icons/md'
+import { AiOutlineHome } from 'react-icons/ai'
+import { RiParentLine, RiSettings4Line } from 'react-icons/ri'
+import './Menu.scss'
+import { Link } from 'react-router-dom'
 
-const Menu = () => {
+const Menu = (): JSX.Element => {
   return (
     <div className="Menu">
       <a href="/" className="Menu-brand">
@@ -45,12 +45,12 @@ const Menu = () => {
           <a href="/" className="Menu-items-item">
             <MdOutlineNotificationsNone />
             <span className="Menu-items-text">Notifications</span>
-            <span className="Menu-items-notifications"></span>
+            <span className="Menu-items-notifications" />
           </a>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu

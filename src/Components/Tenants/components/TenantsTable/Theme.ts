@@ -2,8 +2,8 @@ export const THEME = {
   Table: `
     height: 100%;
   `,
-  Header: ``,
-  Body: ``,
+  Header: '',
+  Body: '',
   BaseRow: `
 
 
@@ -51,6 +51,6 @@ export const THEME = {
       fill: var(--theme-ui-colors-text);
     }
   `,
-  HeaderCell: ``,
-  Cell: ``,
-};
+  HeaderCell: '',
+  Cell: ''
+}

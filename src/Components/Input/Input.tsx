@@ -1,17 +1,17 @@
-import React from "react";
-import "./Input.scss";
+import React from 'react'
+import './Input.scss'
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  placeholder?: string;
-  label?: string;
-  type?: string;
-  ref: string;
-  name?: string;
-  error?: string;
+  placeholder?: string
+  label?: string
+  type?: string
+  ref: string
+  name?: string
+  error?: string
 }
 
 const Input: React.ForwardRefRenderFunction<HTMLInputElement, Props> = (
-  { placeholder, label, type = "text", name, error, ...otherProps },
+  { placeholder, label, type = 'text', name, error, ...otherProps },
   ref
 ) => {
   return (
@@ -30,9 +30,9 @@ const Input: React.ForwardRefRenderFunction<HTMLInputElement, Props> = (
         <span className="Input-error">{error}</span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const FormInput = React.forwardRef(Input);
+const FormInput = React.forwardRef(Input)
 
-export default FormInput;
+export default FormInput

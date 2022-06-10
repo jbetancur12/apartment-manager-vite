@@ -1,12 +1,12 @@
-import "./App.css";
-import Main from "./Components/Layouts/Main";
+import './App.css'
+import Main from './Components/Layouts/Main'
 
-function App() {
+function App(): JSX.Element {
   return (
     <div>
       <Main />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

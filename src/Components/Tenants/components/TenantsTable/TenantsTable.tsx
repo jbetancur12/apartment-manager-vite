@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import {
   Table,
   Header,
@@ -6,56 +6,64 @@ import {
   HeaderCell,
   Body,
   Row,
-  Cell,
-} from "@table-library/react-table-library/table";
-import { useTheme } from "@table-library/react-table-library/theme";
-import { useRowSelect } from "@table-library/react-table-library/select";
-import { usePagination } from "@table-library/react-table-library/pagination";
-import { THEME } from "./Theme.js";
-import "./TenantsTable.scss";
+  Cell
+} from '@table-library/react-table-library/table'
+import { useTheme } from '@table-library/react-table-library/theme'
+import { useRowSelect } from '@table-library/react-table-library/select'
+import { usePagination } from '@table-library/react-table-library/pagination'
+import { THEME } from './Theme.js'
+import './TenantsTable.scss'
 
 interface IPerson {
-  id: string;
-  doc: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  address: string;
+  id: string
+  doc: number
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  address: string
+}
+
+interface IPropsPagination {
+  pageStart: number
+  pageEnd: number
+  totalRows: number
+  actualPage: number
 }
 
 interface Props {
-  data: IPerson[];
+  data: IPerson[]
 }
 
-const TenantsTable = ({ data }: Props) => {
-  const [search, setSearch] = React.useState("");
+const TenantsTable = ({ data }: Props): JSX.Element => {
+  const [search, setSearch] = React.useState('')
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearch(event.target.value)
+  }
 
   const dataTable = {
     nodes: data.filter((item) =>
       item.firstName.toLowerCase().includes(search.toLowerCase())
-    ),
-  };
+    )
+  }
 
   const pagination = usePagination(dataTable, {
     state: {
       page: 0,
-      size: 10,
-    },
-  });
+      size: 10
+    }
+  })
 
-  const propsPagination = {
+  const propsPagination: IPropsPagination = {
     pageStart: pagination.state.getPageBoundaries(dataTable.nodes).start,
     pageEnd: pagination.state.getPageBoundaries(dataTable.nodes).end,
     totalRows: pagination.state.size,
-  };
+    actualPage: pagination.state.page
+  }
 
-  const theme = useTheme(THEME);
-  const select = useRowSelect(dataTable, {}, {});
+  const theme = useTheme(THEME)
+  const select = useRowSelect(dataTable, {}, {})
 
   return (
     <>
@@ -70,8 +78,7 @@ const TenantsTable = ({ data }: Props) => {
           layout={{ horizontalScroll: true }}
           select={select}
           pagination={pagination}
-          className="TableTenants"
-        >
+          className="TableTenants">
           {(tableList) => (
             <>
               <Header>
@@ -90,9 +97,8 @@ const TenantsTable = ({ data }: Props) => {
                     key={item.id}
                     item={item}
                     onDoubleClick={(node, event) =>
-                      console.log("Double Click Row", node, event)
-                    }
-                  >
+                      console.log('Double Click Row', node, event)
+                    }>
                     <Cell>{item.doc}</Cell>
                     <Cell>{item.firstName}</Cell>
                     <Cell>{item.lastName}</Cell>
@@ -116,21 +122,21 @@ const TenantsTable = ({ data }: Props) => {
           <button
             className="TableTenants-pagination-button"
             onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}
-            disabled={pagination.state.page === 0}
-          >
+            disabled={pagination.state.page === 0}>
             ❮
           </button>
           <button
             className="TableTenants-pagination-button"
-            onClick={() => pagination.fns.onSetPage(pagination.state.page + 1)}
-            disabled={pagination.state.page === pagination.state.size - 1}
-          >
+            onClick={(): void =>
+              pagination.fns.onSetPage(propsPagination.actualPage + 1)
+            }
+            disabled={pagination.state.page === pagination.state.size - 1}>
             ❯
           </button>
         </div>
       </>
     </>
-  );
-};
+  )
+}
 
-export default TenantsTable;
+export default TenantsTable
