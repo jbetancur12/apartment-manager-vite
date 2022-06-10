@@ -49,7 +49,12 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "npx prettier --write",
-      "ts-standard --fix"
+      "npx ts-standard --fix"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
