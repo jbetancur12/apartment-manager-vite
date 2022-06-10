@@ -9,133 +9,53 @@ import {
   Cell,
 } from "@table-library/react-table-library/table";
 import { useTheme } from "@table-library/react-table-library/theme";
-import {
-  useRowSelect,
-  HeaderCellSelect,
-  CellSelect,
-  SelectClickTypes,
-  SelectTypes,
-} from "@table-library/react-table-library/select";
+import { useRowSelect } from "@table-library/react-table-library/select";
 import { usePagination } from "@table-library/react-table-library/pagination";
-import { data } from "../../data";
-import "./Table2.scss";
+import { THEME } from "./Theme.js";
+import "./TenantsTable.scss";
 
-const list = [
-  {
-    id: "1",
-    name: "VSCode",
-    deadline: new Date(2020, 1, 17),
-    type: "SETUP",
-    isComplete: true,
-  },
-  {
-    id: "2",
-    name: "JavaScript",
-    deadline: new Date(2020, 2, 28),
-    type: "LEARN",
-    isComplete: true,
-  },
-  {
-    id: "3",
-    name: "React",
-    deadline: new Date(2020, 3, 8),
-    type: "LEARN",
-    isComplete: false,
-  },
-];
+interface IPerson {
+  id: string;
+  doc: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+}
 
-const THEME = {
-  Table: `
-    height: 100%;
-  `,
-  Header: ``,
-  Body: ``,
-  BaseRow: `
+interface Props {
+  data: IPerson[];
+}
 
-
-
-    &.row-select-selected, &.row-select-single-selected {
-      background-color: rgba(209,218,237,1);
-    
-    }
-
-    height: 52px;
-  `,
-  HeaderRow: `
-    font-size: 14px;
-    background: rgb(17,24,39);
-    color:#9CA3AF;
-    font-weight: 600;
-    text-align: center;
-  `,
-  Row: `
-    font-size: 14px;  
-    text-align: center;
-    cursor: pointer;
-    &:not(:last-of-type) {
-      border-bottom: 1px solid var(--theme-ui-colors-border);
-    }
-
-    &.first {
-      border-top: 1px solid var(--theme-ui-colors-border);
-    }
-
-    &:hover {
-      color: var(--theme-ui-colors-text);
-    }
-
- 
-    
-  `,
-  BaseCell: `
-    border-bottom: 1px solid transparent;
-    border-right: 1px solid transparent;
-
-    padding: 8px 0;
-
-    svg {
-      fill: var(--theme-ui-colors-text);
-    }
-  `,
-  HeaderCell: ``,
-  Cell: ``,
-};
-
-const paginationStyles = {
-  color: "black",
-  float: "left",
-  padding: "8px 16px",
-  transition: "background-color 0.3s ease 0s",
-  border: "none",
-  background: "transparent",
-} as const;
-const Table2 = () => {
+const TenantsTable = ({ data }: Props) => {
   const [search, setSearch] = React.useState("");
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
 
-  const data2 = {
+  const dataTable = {
     nodes: data.filter((item) =>
       item.firstName.toLowerCase().includes(search.toLowerCase())
     ),
   };
 
-  console.log(data2.nodes.length);
-
-  const pagination = usePagination(data2, {
+  const pagination = usePagination(dataTable, {
     state: {
       page: 0,
       size: 10,
     },
-    onChange: onPaginationChange,
   });
-  //@ts-ignore
-  function onPaginationChange(action, state) {}
+
+  const propsPagination = {
+    pageStart: pagination.state.getPageBoundaries(dataTable.nodes).start,
+    pageEnd: pagination.state.getPageBoundaries(dataTable.nodes).end,
+    totalRows: pagination.state.size,
+  };
 
   const theme = useTheme(THEME);
-  const select = useRowSelect(data2, {}, {});
+  const select = useRowSelect(dataTable, {}, {});
 
   return (
     <>
@@ -145,7 +65,7 @@ const Table2 = () => {
       </label>
       <>
         <Table
-          data={data2}
+          data={dataTable}
           theme={theme}
           layout={{ horizontalScroll: true }}
           select={select}
@@ -188,12 +108,10 @@ const Table2 = () => {
 
         <div className="TableTenants-pagination">
           <span style={{ marginRight: 32 }}>
-            Rows per page: {pagination.state.size}
+            Rows per page: {propsPagination.totalRows}
           </span>
           <span>
-            {pagination.state.getPageBoundaries(data2.nodes).start} -{" "}
-            {pagination.state.getPageBoundaries(data2.nodes).end} of{" "}
-            {data2.nodes.length}
+            {`${propsPagination.pageStart} - ${propsPagination.pageEnd} of ${dataTable.nodes.length}`}
           </span>
           <button
             className="TableTenants-pagination-button"
@@ -215,4 +133,4 @@ const Table2 = () => {
   );
 };
 
-export default Table2;
+export default TenantsTable;

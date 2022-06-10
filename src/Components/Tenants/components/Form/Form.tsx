@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Button from "../../Button/Button";
-import Input from "../../Input/Input";
+import Button from "../../../Button/Button";
+import Input from "../../../Input/Input";
 
 interface Tenant {
   firstname: string;

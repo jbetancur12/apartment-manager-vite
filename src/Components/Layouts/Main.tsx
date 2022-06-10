@@ -13,7 +13,7 @@ const Main = () => {
       <section className="Main-cards">
         <Routes>
           <Route path="/" element={<MainCards />} />
-          <Route path="about" element={<Tenants />} />
+          <Route path="tenants" element={<Tenants />} />
         </Routes>
       </section>
     </main>

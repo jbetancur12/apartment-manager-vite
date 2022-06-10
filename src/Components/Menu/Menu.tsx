@@ -22,7 +22,7 @@ const Menu = () => {
             <AiOutlineHome />
             <span className="Menu-items-text">Dashboard</span>
           </Link>
-          <Link to="/about" className="Menu-items-item">
+          <Link to="/tenants" className="Menu-items-item">
             <RiParentLine />
             <span className="Menu-items-text">Tenants</span>
           </Link>
