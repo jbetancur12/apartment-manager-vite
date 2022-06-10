@@ -16,7 +16,9 @@ import {
   SelectClickTypes,
   SelectTypes,
 } from "@table-library/react-table-library/select";
+import { usePagination } from "@table-library/react-table-library/pagination";
 import { data } from "../../data";
+import "./Table2.scss";
 
 const list = [
   {
@@ -98,6 +100,15 @@ const THEME = {
   HeaderCell: ``,
   Cell: ``,
 };
+
+const paginationStyles = {
+  color: "black",
+  float: "left",
+  padding: "8px 16px",
+  transition: "background-color 0.3s ease 0s",
+  border: "none",
+  background: "transparent",
+} as const;
 const Table2 = () => {
   const [search, setSearch] = React.useState("");
 
@@ -111,6 +122,18 @@ const Table2 = () => {
     ),
   };
 
+  console.log(data2.nodes.length);
+
+  const pagination = usePagination(data2, {
+    state: {
+      page: 0,
+      size: 10,
+    },
+    onChange: onPaginationChange,
+  });
+  //@ts-ignore
+  function onPaginationChange(action, state) {}
+
   const theme = useTheme(THEME);
   const select = useRowSelect(data2, {}, {});
 
@@ -120,16 +143,14 @@ const Table2 = () => {
         Search by Name:
         <input id="search" type="text" onChange={handleSearch} />
       </label>
-      <div
-        style={{
-          height: "550px",
-        }}
-      >
+      <>
         <Table
           data={data2}
           theme={theme}
           layout={{ horizontalScroll: true }}
           select={select}
+          pagination={pagination}
+          className="TableTenants"
         >
           {(tableList) => (
             <>
@@ -164,7 +185,32 @@ const Table2 = () => {
             </>
           )}
         </Table>
-      </div>
+
+        <div className="TableTenants-pagination">
+          <span style={{ marginRight: 32 }}>
+            Rows per page: {pagination.state.size}
+          </span>
+          <span>
+            {pagination.state.getPageBoundaries(data2.nodes).start} -{" "}
+            {pagination.state.getPageBoundaries(data2.nodes).end} of{" "}
+            {data2.nodes.length}
+          </span>
+          <button
+            className="TableTenants-pagination-button"
+            onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}
+            disabled={pagination.state.page === 0}
+          >
+            ❮
+          </button>
+          <button
+            className="TableTenants-pagination-button"
+            onClick={() => pagination.fns.onSetPage(pagination.state.page + 1)}
+            disabled={pagination.state.page === pagination.state.size - 1}
+          >
+            ❯
+          </button>
+        </div>
+      </>
     </>
   );
 };

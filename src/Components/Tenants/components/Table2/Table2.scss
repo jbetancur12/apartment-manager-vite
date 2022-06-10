@@ -1,0 +1,28 @@
+.TableTenants {
+  caret-color: transparent;
+  &-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    font-size: 14px;
+    font-weight: 600;
+
+    &-button {
+      color: black;
+      float: left;
+      padding: 8px 16px;
+      transition: background-color 0.3s ease 0s;
+      border: none;
+      background: transparent;
+      border-radius: 50%;
+      cursor: pointer;
+      &:disabled {
+        color: gray;
+        opacity: 0.5;
+      }
+      &:hover:not(:disabled) {
+        background-color: rgba(139, 134, 134, 0.5);
+      }
+    }
+  }
+}
