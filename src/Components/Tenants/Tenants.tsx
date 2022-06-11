@@ -11,6 +11,33 @@ import Form from './components/Form/Form'
 const Tenants = (): JSX.Element => {
   const { isShown, toggle } = useModal()
 
+  const columns = [
+    {
+      header: 'Doc',
+      cell: 'doc'
+    },
+    {
+      header: 'Name',
+      cell: 'firstName'
+    },
+    {
+      header: 'LastName',
+      cell: 'lastName'
+    },
+    {
+      header: 'E-mail',
+      cell: 'email'
+    },
+    {
+      header: 'Phone',
+      cell: 'phone'
+    },
+    {
+      header: 'Address',
+      cell: 'address'
+    }
+  ]
+
   return (
     <div>
       <Button
@@ -27,7 +54,7 @@ const Tenants = (): JSX.Element => {
         classname="Tenants-modalWidth"
       />
       <div>
-        <TenantsTable data={data} />
+        <TenantsTable data={data} columns={columns} />
       </div>
     </div>
   )

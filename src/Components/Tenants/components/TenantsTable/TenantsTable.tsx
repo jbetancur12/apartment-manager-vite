@@ -33,9 +33,10 @@ interface IPropsPagination {
 
 interface Props {
   data: IPerson[]
+  columns: Array<{ header: string; cell: string }>
 }
 
-const TenantsTable = ({ data }: Props): JSX.Element => {
+const TenantsTable = ({ data, columns }: Props): JSX.Element => {
   const [search, setSearch] = React.useState('')
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -83,12 +84,9 @@ const TenantsTable = ({ data }: Props): JSX.Element => {
             <>
               <Header>
                 <HeaderRow>
-                  <HeaderCell>Doc</HeaderCell>
-                  <HeaderCell>Name</HeaderCell>
-                  <HeaderCell>Lastname</HeaderCell>
-                  <HeaderCell>E-mail</HeaderCell>
-                  <HeaderCell>Phone</HeaderCell>
-                  <HeaderCell>Address</HeaderCell>
+                  {columns.map((item) => (
+                    <HeaderCell key={item.header}>{item.header}</HeaderCell>
+                  ))}
                 </HeaderRow>
               </Header>
               <Body>
@@ -99,12 +97,11 @@ const TenantsTable = ({ data }: Props): JSX.Element => {
                     onDoubleClick={(node, event) =>
                       console.log('Double Click Row', node, event)
                     }>
-                    <Cell>{item.doc}</Cell>
-                    <Cell>{item.firstName}</Cell>
-                    <Cell>{item.lastName}</Cell>
-                    <Cell>{item.email}</Cell>
-                    <Cell>{item.phone}</Cell>
-                    <Cell>{item.address}</Cell>
+                    {columns.map((cell, idx) => (
+                      <Cell key={idx}>
+                        {item[cell.cell as keyof typeof item]}
+                      </Cell>
+                    ))}
                   </Row>
                 ))}
               </Body>
