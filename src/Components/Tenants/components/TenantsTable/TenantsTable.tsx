@@ -110,10 +110,17 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
 
   return (
     <>
-      <label htmlFor='search'>
-        Search by <Filter />
-        <input id='search' type='text' onChange={handleSearch} />
-      </label>
+      <div className='TableTenants-search'>
+        <label htmlFor='search'>
+          Search by <Filter />
+          <input
+            id='search'
+            className='TableTenants-inputSearch'
+            type='text'
+            onChange={handleSearch}
+          />
+        </label>
+      </div>
 
       <>
         <Table

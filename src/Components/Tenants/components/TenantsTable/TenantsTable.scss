@@ -1,5 +1,11 @@
 .TableTenants {
   caret-color: transparent;
+  &-search {
+    margin-bottom: 8px;
+  }
+  &-inputSearch {
+    margin-left: 16px;
+  }
   &-pagination {
     display: flex;
     align-items: center;
