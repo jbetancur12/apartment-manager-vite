@@ -39,9 +39,10 @@ interface Props {
 const TenantsTable = ({ data, columns }: Props): JSX.Element => {
   const [search, setSearch] = React.useState({
     term: '',
-    field: '',
-    column: 'Doc'
+    field: columns[0].cell,
+    column: columns[0].header
   })
+
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -74,7 +75,8 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
     setSearch({
       ...search,
       field: e.target.value,
-      column: e.target.options[e.target.selectedIndex].text
+      column: e.target.options[e.target.selectedIndex].text,
+      term: ''
     })
   }
 
@@ -118,6 +120,7 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
             className='TableTenants-inputSearch'
             type='text'
             onChange={handleSearch}
+            value={search.term}
           />
         </label>
       </div>
