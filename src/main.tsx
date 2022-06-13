@@ -13,6 +13,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
+      {/* Hola */}
     </BrowserRouter>
   </React.StrictMode>
 )
