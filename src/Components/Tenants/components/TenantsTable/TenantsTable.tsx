@@ -38,6 +38,7 @@ interface Props {
 
 const TenantsTable = ({ data, columns }: Props): JSX.Element => {
   const [search, setSearch] = React.useState('')
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(event.target.value)
@@ -52,9 +53,21 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
   const pagination = usePagination(dataTable, {
     state: {
       page: 0,
-      size: 10
+      size: rowsPerPage
     }
   })
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setRowsPerPage(Number(e.target.value))
+  }
+
+  const SelectX = (): JSX.Element => (
+    <select onChange={(e) => handleChange(e)}>
+      <option value={10}>10</option>
+      <option value={20}>20</option>
+      <option value={30}>30</option>
+    </select>
+  )
 
   const propsPagination: IPropsPagination = {
     pageStart: pagination.state.getPageBoundaries(dataTable.nodes).start,
@@ -72,6 +85,7 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
         Search by Name:
         <input id="search" type="text" onChange={handleSearch} />
       </label>
+
       <>
         <Table
           data={dataTable}
@@ -111,7 +125,8 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
 
         <div className="TableTenants-pagination">
           <span style={{ marginRight: 32 }}>
-            Rows per page: {propsPagination.totalRows}
+            {/* Rows per page: {propsPagination.totalRows} */}
+            Rows per page: <SelectX />
           </span>
           <span>
             {`${propsPagination.pageStart} - ${propsPagination.pageEnd} of ${dataTable.nodes.length}`}
