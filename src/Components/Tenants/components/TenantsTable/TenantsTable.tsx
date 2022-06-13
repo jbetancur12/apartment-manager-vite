@@ -33,20 +33,27 @@ interface IPropsPagination {
 
 interface Props {
   data: IPerson[]
-  columns: Array<{ header: string; cell: string }>
+  columns: Array<{ header: string, cell: string }>
 }
 
 const TenantsTable = ({ data, columns }: Props): JSX.Element => {
-  const [search, setSearch] = React.useState('')
+  const [search, setSearch] = React.useState({
+    term: '',
+    field: '',
+    column: 'Doc'
+  })
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearch(event.target.value)
+    setSearch({ ...search, term: event.target.value })
   }
 
   const dataTable = {
     nodes: data.filter((item) =>
-      item.firstName.toLowerCase().includes(search.toLowerCase())
+      item[search.field as keyof typeof item]
+        .toString()
+        .toLowerCase()
+        .includes(search.term.toLowerCase())
     )
   }
 
@@ -57,8 +64,18 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
     }
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setRowsPerPage(Number(e.target.value))
+  }
+
+  const handleChangeSelect = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ): void => {
+    setSearch({
+      ...search,
+      field: e.target.value,
+      column: e.target.options[e.target.selectedIndex].text
+    })
   }
 
   const SelectX = (): JSX.Element => (
@@ -79,11 +96,23 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
   const theme = useTheme(THEME)
   const select = useRowSelect(dataTable, {}, {})
 
+  const Filter = (): JSX.Element => {
+    return (
+      <select value={search.field} onChange={(e) => handleChangeSelect(e)}>
+        {columns.map((item) => (
+          <option key={item.cell} value={item.cell}>
+            {item.header}
+          </option>
+        ))}
+      </select>
+    )
+  }
+
   return (
     <>
-      <label htmlFor="search">
-        Search by Name:
-        <input id="search" type="text" onChange={handleSearch} />
+      <label htmlFor='search'>
+        Search by <Filter />
+        <input id='search' type='text' onChange={handleSearch} />
       </label>
 
       <>
@@ -93,7 +122,8 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
           layout={{ horizontalScroll: true }}
           select={select}
           pagination={pagination}
-          className="TableTenants">
+          className='TableTenants'
+        >
           {(tableList) => (
             <>
               <Header>
@@ -109,8 +139,8 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
                     key={item.id}
                     item={item}
                     onDoubleClick={(node, event) =>
-                      console.log('Double Click Row', node, event)
-                    }>
+                      console.log('Double Click Row', node, event)}
+                  >
                     {columns.map((cell, idx) => (
                       <Cell key={idx}>
                         {item[cell.cell as keyof typeof item]}
@@ -123,7 +153,7 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
           )}
         </Table>
 
-        <div className="TableTenants-pagination">
+        <div className='TableTenants-pagination'>
           <span style={{ marginRight: 32 }}>
             {/* Rows per page: {propsPagination.totalRows} */}
             Rows per page: <SelectX />
@@ -132,17 +162,18 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
             {`${propsPagination.pageStart} - ${propsPagination.pageEnd} of ${dataTable.nodes.length}`}
           </span>
           <button
-            className="TableTenants-pagination-button"
+            className='TableTenants-pagination-button'
             onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}
-            disabled={pagination.state.page === 0}>
+            disabled={pagination.state.page === 0}
+          >
             ❮
           </button>
           <button
-            className="TableTenants-pagination-button"
+            className='TableTenants-pagination-button'
             onClick={(): void =>
-              pagination.fns.onSetPage(propsPagination.actualPage + 1)
-            }
-            disabled={pagination.state.page === pagination.state.size - 1}>
+              pagination.fns.onSetPage(propsPagination.actualPage + 1)}
+            disabled={pagination.state.page === pagination.state.size - 1}
+          >
             ❯
           </button>
         </div>
