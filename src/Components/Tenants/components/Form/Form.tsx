@@ -13,7 +13,7 @@ interface Tenant {
   address: string
 }
 
-const Form = (): JSX.Element => {
+const Form = ({ ...props }): JSX.Element => {
   const {
     register,
     handleSubmit,
@@ -38,6 +38,7 @@ const Form = (): JSX.Element => {
     void executePost({
       data
     })
+    props.toogle()
   }
 
   return (

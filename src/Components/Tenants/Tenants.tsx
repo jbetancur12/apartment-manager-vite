@@ -56,7 +56,7 @@ const Tenants = (): JSX.Element => {
       <Modal
         isShown={isShown}
         hide={toggle}
-        modalContent={<Form />}
+        modalContent={<Form toogle={toggle} />}
         classname='Tenants-modalWidth'
       />
       <div>
