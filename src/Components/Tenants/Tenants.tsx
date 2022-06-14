@@ -4,12 +4,18 @@ import { BsPlusLg } from 'react-icons/bs'
 import { useModal } from '../../hooks/useModal'
 import Modal from '../Modal/Modal'
 import TenantsTable from './components/TenantsTable/TenantsTable'
-import { data } from './data'
+// import { data } from './data'
 import './Tenants.scss'
 import Form from './components/Form/Form'
+import useAxios from 'axios-hooks'
 
 const Tenants = (): JSX.Element => {
   const { isShown, toggle } = useModal()
+
+  const [{ data, loading, error }] = useAxios('http://192.168.0.6:3000/tenants')
+
+  if (loading) return <p>Loading...</p>
+  if (error != null) return <p>Error!</p>
 
   const columns = [
     {
@@ -41,17 +47,17 @@ const Tenants = (): JSX.Element => {
   return (
     <div>
       <Button
-        label="Add Tenant"
-        variant="sucess"
+        label='Add Tenant'
+        variant='sucess'
         icon={<BsPlusLg />}
         onClick={toggle}
-        className="Tenants-button_margin"
+        className='Tenants-button_margin'
       />
       <Modal
         isShown={isShown}
         hide={toggle}
         modalContent={<Form />}
-        classname="Tenants-modalWidth"
+        classname='Tenants-modalWidth'
       />
       <div>
         <TenantsTable data={data} columns={columns} />
