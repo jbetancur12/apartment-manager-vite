@@ -95,6 +95,8 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
     actualPage: pagination.state.page
   }
 
+  console.log(propsPagination)
+
   const theme = useTheme(THEME)
   const select = useRowSelect(dataTable, {}, {})
 
@@ -120,6 +122,7 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
             className='TableTenants-inputSearch'
             type='text'
             onChange={handleSearch}
+            placeholder='Write something'
             value={search.term}
           />
         </label>
@@ -182,7 +185,10 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
             className='TableTenants-pagination-button'
             onClick={(): void =>
               pagination.fns.onSetPage(propsPagination.actualPage + 1)}
-            disabled={pagination.state.page === pagination.state.size - 1}
+            disabled={
+              propsPagination.pageEnd - propsPagination.pageStart <
+              pagination.state.size - 1
+            }
           >
             ❯
           </button>
