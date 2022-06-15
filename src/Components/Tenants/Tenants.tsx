@@ -58,6 +58,7 @@ const Tenants = (): JSX.Element => {
         hide={toggle}
         modalContent={<Form toogle={toggle} />}
         classname='Tenants-modalWidth'
+        headerText='Create a Tenant'
       />
       <div>
         <TenantsTable data={data} columns={columns} />

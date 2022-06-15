@@ -41,19 +41,27 @@
     padding: 0.3rem;
 
     &-text {
-      color: #fff;
+      color: rgb(22, 21, 21);
       align-self: center;
-      color: lightgray;
+          font-size: 20px;
+      margin: auto;
+      margin-top: 20px;
+      font-weight: 600;
     }
 
     &-close {
-      font-size: 0.8rem;
+      font-size: 20px;
       border: none;
       border-radius: 3px;
       margin-left: 0.5rem;
+      margin-right: 1rem;
       background: none;
+      display: flex;
+      align-items: center;
+
       &:hover {
         cursor: pointer;
+        opacity: 0.8;
       }
     }
   }

@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import Button from '../../../Button/Button'
 import Input from '../../../Input/Input'
 import useAxios from 'axios-hooks'
+import './Form.scss'
 
 interface Tenant {
   firstName: string
@@ -42,63 +43,70 @@ const Form = ({ ...props }): JSX.Element => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Input
-        type='number'
-        min='0'
-        placeholder='Id Document'
-        label='Document'
-        {...register('doc', {
-          required: 'Document is required.',
-          valueAsNumber: true,
-          min: { value: 0, message: 'Min Value is 0' }
-        })}
-        error={errors.doc?.message}
-      />
-      <Input
-        type='text'
-        placeholder='firstname'
-        label='Name'
-        {...register('firstName', { required: 'Name is required.' })}
-        error={errors.firstName?.message}
-      />
-      <Input
-        type='text'
-        placeholder='lastname'
-        label='LastName'
-        {...register('lastName', { required: 'LastName is required.' })}
-        error={errors.lastName?.message}
-      />
+    <div className='Form'>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          type='number'
+          min='0'
+          placeholder='Id Document'
+          label='Document'
+          {...register('doc', {
+            required: 'Document is required.',
+            valueAsNumber: true,
+            min: { value: 0, message: 'Min Value is 0' }
+          })}
+          error={errors.doc?.message}
+        />
+        <Input
+          type='text'
+          placeholder='firstname'
+          label='Name'
+          {...register('firstName', { required: 'Name is required.' })}
+          error={errors.firstName?.message}
+        />
+        <Input
+          type='text'
+          placeholder='lastname'
+          label='LastName'
+          {...register('lastName', { required: 'LastName is required.' })}
+          error={errors.lastName?.message}
+        />
 
-      <Input
-        type='email'
-        placeholder='Email'
-        label='Email'
-        {...register('email', { required: 'email is required.' })}
-        error={errors.email?.message}
-      />
+        <Input
+          type='email'
+          placeholder='Email'
+          label='Email'
+          {...register('email', { required: 'email is required.' })}
+          error={errors.email?.message}
+        />
 
-      <Input
-        type='tel'
-        placeholder='Phone'
-        label='Phone'
-        {...register('phone', {
-          required: 'Phone is required.',
-          pattern: { value: /^[0-9]*$/, message: 'Fill a valid number phone' }
-        })}
-        error={errors.phone?.message}
-      />
+        <Input
+          type='tel'
+          placeholder='Phone'
+          label='Phone'
+          {...register('phone', {
+            required: 'Phone is required.',
+            pattern: { value: /^[0-9]*$/, message: 'Fill a valid number phone' }
+          })}
+          error={errors.phone?.message}
+        />
 
-      <Input
-        type='text'
-        placeholder='Address'
-        label='Address'
-        {...register('address', { required: 'Address is required.' })}
-        error={errors.address?.message}
-      />
+        <Input
+          type='text'
+          placeholder='Address'
+          label='Address'
+          {...register('address', { required: 'Address is required.' })}
+          error={errors.address?.message}
+        />
 
-      <Button type='submit' label='Submit' variant='secondary' />
-    </form>
+        <Button
+          type='submit'
+          label='Submit'
+          variant='secondary'
+          className='Form-button'
+        />
+      </form>
+    </div>
   )
 }
 
