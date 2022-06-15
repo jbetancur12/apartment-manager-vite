@@ -54,6 +54,11 @@
       color: inherit;
       text-decoration: inherit;
       position: relative;
+      align-items: center;
+      &_active{
+        opacity: 0.8;
+        background-color: rgba(52, 61, 78, 0.7);
+      }
     }
 
     &-text {
