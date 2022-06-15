@@ -11,6 +11,7 @@ import {
 import { useTheme } from '@table-library/react-table-library/theme'
 import { useRowSelect } from '@table-library/react-table-library/select'
 import { usePagination } from '@table-library/react-table-library/pagination'
+import { useNavigate } from 'react-router-dom'
 import { THEME } from './Theme.js'
 import './TenantsTable.scss'
 
@@ -44,6 +45,8 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
   })
 
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
+
+  const navigate = useNavigate()
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch({ ...search, term: event.target.value })
@@ -150,7 +153,10 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
                     key={item.id}
                     item={item}
                     onDoubleClick={(node, event) =>
-                      console.log('Double Click Row', node, event)}
+                      navigate(`/tenant/${node.id}`, {
+                        replace: true,
+                        state: { ...node }
+                      })}
                   >
                     {columns.map((cell, idx) => (
                       <Cell key={idx}>

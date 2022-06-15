@@ -1,7 +1,7 @@
 import './App.css'
-import Main from './Components/Layouts/Main'
+import Main from './Layouts/Main'
 
-function App(): JSX.Element {
+function App (): JSX.Element {
   return (
     <div>
       <Main />
