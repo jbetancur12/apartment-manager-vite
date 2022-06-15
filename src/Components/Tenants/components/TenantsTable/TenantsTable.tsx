@@ -95,8 +95,6 @@ const TenantsTable = ({ data, columns }: Props): JSX.Element => {
     actualPage: pagination.state.page
   }
 
-  console.log(propsPagination)
-
   const theme = useTheme(THEME)
   const select = useRowSelect(dataTable, {}, {})
 
